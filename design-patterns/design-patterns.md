@@ -1,6 +1,10 @@
 # Design Patterns Musings
 Notes related to software design patterns.
 
+## Inheritance
+
+
+
 ## Behavioural
 ### Chain of Responsibility
 [Best example](https://www.tutorialspoint.com/design_pattern/chain_of_responsibility_pattern.htm) I could find that is real world which I could understand the concept.
