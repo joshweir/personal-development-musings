@@ -83,7 +83,3 @@ describe('<LoginOrRegister> container', () => {
   });
 });
 ```
-
-## Mock redux sagas
-
-TODO
