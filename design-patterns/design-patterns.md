@@ -3,10 +3,26 @@ Notes related to software design patterns.
 
 ## Inheritance
 
+Prefer composition over inheritance. Makes sense to use inheritance if the subclass absolutely has an "is a" relationship with the superclass.
 
+## Strategy
+Composition over inheritance
 
-## Behavioural
-### Chain of Responsibility
+Encapsulate a piece of functionality into a concrete class implementing an interface, inject at runtime (constructor param and/or setter)
+
+Prevents duplication of code, implement a functionality in a subset of sub classes for example.
+
+This is really the building block of composition oo programming.
+
+## Observer (PubSub)
+
+Many objects (observers) may subscribe to a single subject object, all subjects are notified when the subject changes state.
+
+In Redux, a container subscribes to the store when it uses the connect method to map state to props.
+
+Most UIs implement the Observer for event handlers (eg. button click event).
+
+## Chain of Responsibility
 [Best example](https://www.tutorialspoint.com/design_pattern/chain_of_responsibility_pattern.htm) I could find that is real world which I could understand the concept.
 
 ![Chain of Responsibility UML Diagram](images/chain_pattern_uml_diagram.jpg)
