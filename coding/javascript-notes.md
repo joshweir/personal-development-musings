@@ -123,9 +123,11 @@ TODO
 
 Instead of putting many variables on the global object, create a single name space variable on global object for your app, and put objects in there:
 
+```javascript
 var myApp = {
 	var1: {
 		var1_1: () => console.log('hello');
 	}
 };
 myApp.var1.var1_1();
+```
