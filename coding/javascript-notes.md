@@ -131,3 +131,9 @@ var myApp = {
 };
 myApp.var1.var1_1();
 ```
+
+### var vs let vs const
+
+* `let` and `const` has block scope, `var` has function scope
+* `var` is hoisted
+* `const` cannot be re assigned, but you can modify its properties (if say it's an object), or add/remove elements if it's an array.
