@@ -99,7 +99,13 @@ objpriv1.getvar();
 console.log(objpriv1._myvar, '//undefined');
 ```
 
-### Invocation
+### Invocation and `this`
+
+Summary: `this` is annoying - depending on the way a function is invoked, `this` will point to different things:
+* function literal: `this` = global object
+* function is object property: `this` = the object
+* function literal inside of object property function: `this` now refers to global object (uninintuitively)
+* constructor: `this` = the object constructed
 
 ```javascript
 //function invocation
