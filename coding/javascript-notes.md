@@ -99,6 +99,69 @@ objpriv1.getvar();
 console.log(objpriv1._myvar, '//undefined');
 ```
 
+### Invocation
+
+```javascript
+//function invocation
+var foo = function() {
+  //this is the global object
+  console.log(this.foo.toString());
+}
+foo();
+
+//method invocation
+var myObj = {
+  myVal: 1,
+  foo: function() {
+    //this is myObj
+    console.log(this.myVal);
+  }
+}
+myObj.foo();
+
+//function invocation within a method
+var myObj2 = {
+  myVal: 1,
+  foo: function() {
+    var helper = function() {
+      //this is still the global object (unintuitively)
+      console.log(this.myObj2);
+    }
+    helper()
+  }
+}
+myObj2.foo();
+
+//constructor invocation
+//capitalize the function name as convention
+MyObj = function(foo) {
+  this.foo = foo;
+}
+MyObj.prototype.getFoo = function() {
+  return this.foo
+}
+//this refers to the current object
+myConstructed = new MyObj('myfoo');
+console.log(myConstructed.getFoo());
+
+//apply (or call) invocation
+//choose what I want this to be when invoking a function
+var someObj = {foo: 'otherFoo'}
+console.log(MyObj.prototype.getFoo.apply(someObj))
+
+//generic function to extend objects with methods easily:
+Function.prototype.method = function (name, func) {
+  if (!this.prototype[name]) {
+    this.prototype[name] = func;
+  }
+};
+//add trim to string:
+String.method('addBang', function () {
+  return this + '!';
+});
+console.log('boom'.addBang());
+```
+
 ## Lambda
 
 An anonymous function.
@@ -137,3 +200,7 @@ myApp.var1.var1_1();
 * `let` and `const` has block scope, `var` has function scope
 * `var` is hoisted
 * `const` cannot be re assigned, but you can modify its properties (if say it's an object), or add/remove elements if it's an array.
+
+### CORS
+
+Usually by default, if you make an xml http request (such as ajax) to an endpoint and the origin url domain name of the request does not match the server url domain name, the request will fail with an error like `No 'Access-Control-Allow-Origin' header is present..`. This is a security measure that the server can specify what endpoint's it trusts to make xhr requests to it. The server could potentially specify, with the CORS headers, what endpoint's it trusts and/or what routes to enable these headers for.
