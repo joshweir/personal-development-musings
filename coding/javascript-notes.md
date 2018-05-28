@@ -170,7 +170,7 @@ console.log('boom'.addBang());
 
 ## Lambda
 
-An anonymous function.
+A function that is passed as an argument to another function, returned as a value from a function, or assigned to variables or data structures.
 
 ## Partial Application and Currying
 
