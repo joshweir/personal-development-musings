@@ -7,7 +7,7 @@ A function can access variables declared outside it's scope. Every inner functio
 ```javascript
 let outer = 'outer';
 lexicalEg = function() {
-	console.log(outer, 'l1 output: outer');
+  console.log(outer, 'l1 output: outer');
   return function() {
   	console.log(outer, 'l2 output: outer');
   }
@@ -101,11 +101,11 @@ console.log(objpriv1._myvar, '//undefined');
 
 ### Invocation and `this`
 
-Summary: `this` is annoying - depending on the way a function is invoked, `this` will point to different things:
-* function literal: `this` = global object
-* function is object property: `this` = the object
-* function literal inside of object property function: `this` now refers to global object (uninintuitively)
-* constructor: `this` = the object constructed
+Summary: `this` is annoying - depending on the way a function is invoked, `this` will point to [different things](https://medium.com/quick-code/understanding-the-this-keyword-in-javascript-cb76d4c7c5e8):
+* By default, `this` refers to global object which is global in case of NodeJS and window object in case of browser
+* When a method is called as a property of object, then `this` refers to the parent object. Which means only when called on property of object: `myObj.func()` where if you assign the function to a variable and invoke, then `this` becomes the global object: `let func = myObj.func; func()`
+* When a function is called with `new` operator then `this` refers to the newly created instance.
+* When a function is called using `call` and `apply` method then `this` refers to the value passed as first argument of `call` or `apply` method.
 
 ```javascript
 //function invocation
