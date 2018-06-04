@@ -186,7 +186,22 @@ TODO
 
 ## Functional Programming
 
-TODO
+* Functions should be pure (given inputs, will always produce the same output). This also means, do not mutate objects passed as input to the function - as these objects are passed by reference - instead clone the object first [before modifying the clone](https://gist.github.com/ericelliott/43a86f0e7ffb22b6c53f#file-pure-add-to-cart-js):
+
+```javascript
+const addToCart = (cart, item, quantity) => {
+  const newCart = lodash.cloneDeep(cart);
+  newCart.items.push({
+    item,
+    quantity
+  });
+  return newCart;
+};
+```
+
+* Build programs on re-usable functions. Through higher order functions (functions that can be passed around) we can use these re-usable functions as building blocks through function composition (output of functions being input of another function and so on). Perfect example [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-function-composition-20dfb109a1a0). Make use of lodash (or ramda) functions `compose` (or `pipe` which is opposite of `compose`) and `curry` to break up a multi input function into a curried version of the same function. 
+
+* For traversing / computing arrays, rather than using imperative programming (eg. `for(var i=0; i<arr.length; i++`) use the functional methods available on `Array` (eg. `map`, `filter`, etc). 
 
 ## Don't pollute global scope
 
