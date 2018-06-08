@@ -9,3 +9,4 @@ Personal development notes that I would like to remember.
   * [React Notes](coding/react-notes.md)
   * [My Jest Cheatsheet](coding/my-jest-cheatsheet.md)
   * [My Sinon Cheatsheet](coding/my-sinon-cheatsheet.md)
+  * [Redis Notes](coding/redis-notes.md)
