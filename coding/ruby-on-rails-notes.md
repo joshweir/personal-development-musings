@@ -84,6 +84,49 @@ Can eager load with these techniques multiple levels deep:
 [Source](https://blog.arkency.com/2013/12/rails4-preloading/)
 [Another Source](https://medium.com/@codenode/10-tips-for-eager-loading-to-avoid-n-1-queries-in-rails-2bad54456a3f)
 
+## blocks and `yield`
+
+Generally:
+* Use braces { } for single-line blocks
+* Use do end for multi-line blocks
+But:
+* Use do end for procedural blocks - that perform a side effect, but you don't need the return value.
+* Use braces { } for functional blocks, that return a value that could be used for chaining.
+
+Blocks (and hence yield) allow a method to invoke it's own code before and/or after a block of code. The block passed to the method is called by the `yield` keyword inside the method. `yield` returns whatever the block returns, it also takes input parameters which means whatever the value in the method that is passed to yield will be available as arguments to the block.
+
+Example:
+This shows typical ruby use case to allow an object to be instantiated with a block doing the initialisation.
+
+```ruby
+class Car
+  attr_accessor :color, :make
+
+  def initialize params={}, &block
+    @color = params.fetch(:color, nil)
+    @make = params.fetch(:make, nil)
+    block.call self if block_given?
+    #could also replace block.call with yield
+  end
+end
+
+# the car is instantiated initializing the color property as a parameter passed to new, and the make property is set in the block passed to new
+car = Car.new({color: 'blue'}) {|c|
+  c.make = 'toyota'
+}
+puts "color: #{car.color} make: #{car.make}"
+```
+
+
+Blocks are useful to allow a method to be customized at run time, the block can do any number of side effects before returning the value to be yielded to the method.
+
+def wrap_in_tags(tag, text)
+  html = "<#{tag}>#{text}</#{tag}>"
+  yield html
+end
+
+wrap_in_tags("title", "Hello") { |html| Mailer.send(html) }
+wrap_in_tags("title", "Hello") { |html| Page.create(:body => html) }
 
 ## TODO
 
