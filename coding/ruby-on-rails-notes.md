@@ -299,9 +299,3 @@ http://rubylearning.com/satishtalim/tutorial.html
 refresh my memory of the design patterns ive learned, and how they are implemented in ruby:
 https://github.com/nslocum/design-patterns-in-ruby
 
-do ruby / rails interview questions
-
-Do a (level) check algorithm
-Do a binary search algorithm
-do a merge sort algorithm
-check others
