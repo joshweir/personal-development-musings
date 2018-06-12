@@ -54,7 +54,8 @@ ideal man hours x focus factor (between 0.55 and 0.7 depending on how efficient 
 * Note each team members skill capability, the tasks they could work on. eg. we wouldn't assign development tasks to a tester. Also note the number of realistic man hours available per team member.
 * Iterate through product backlog stories taking a random assortment (vary size and types of stories)
 * Break down the story into tasks, estimate the tasks in terms of ideal man days / hours and also the type of task (which team member(s) could work on that task), add task estimate to an available team member who has the capable skills' task estimate tally. Stop this process once a team member no longer has available "realistic" man hours, this is the teams estimated velocity in terms of story points and man hours. (If one team member is at full capacity but another is far under capacity, then it makes sense to switch stories until a more realistic allocation of stories / tasks exists within the team - as this is what would really happen during sprint planning).
-* Apply a story points forecasted range using the cone of uncertainty, multiple estimated velocity by 60% and 160% to determine velocity range.
+* After ~12+ stories have been broken down into tasks and estimated, apply a story points estimate to each story by comparing the total size of each story to other estimated stories. Aim to have most stories within a range of 1 to 8 story points (if using story points for velocity). This will be the initial forecast for velocity.
+* Apply a story points (ideal man days) forecasted range to the intial forecast for velocity using the cone of uncertainty, multiple estimated velocity by 60% and 160% - this is the range of estimated team velocity.
 
 ### Estimating Team Size (required: fixed duration and scope)
 
