@@ -1,5 +1,20 @@
 # Agile Notes
 
+- [Estimating in Ideal Days vs Story Points](#estimating-in-ideal-days-vs-story-points)
+- [Maintain Product Backlog](#estimating-in-ideal-days-vs-story-points)
+- [Release Planning](#estimating-in-ideal-days-vs-story-points)
+  * [Forecast team velocity](#sub-heading)
+  * [Estimating Team Size (required: fixed duration and scope)](#sub-heading)
+  * [Estimating Duration (required: fixed team size and scope)](#sub-heading)
+  * [Estimating impact of team size change on velocity](#sub-heading)
+    + [What if I don't have the data?](#sub-sub-heading)
+- [Estimating and Sprint Planning](#heading)
+  * [Pre Meeting](#pre-meeting)
+  * [The Meeting](#the-meeting)
+- [Daily Scrum Meeting](#daily-scrum-meeting)
+- [Sprint Retrospective](#sprint-retrospective)
+- [TODO](#todo)
+
 ## Estimating in Ideal Days vs Story Points
 
 Benefits of story points:
