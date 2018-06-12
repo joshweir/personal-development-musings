@@ -3,7 +3,7 @@
 - [Estimating in Ideal Days vs Story Points](#estimating-in-ideal-days-vs-story-points)
 - [Maintain Product Backlog](#maintain-product-backlog)
 - [Release Planning](#release-planning)
-  * [Forecast team velocity](#forecast-team-velocity)
+  * [Estimate team velocity](#estimate-team-velocity)
   * [Estimating Team Size (required: fixed duration and scope)](#estimating-team-size-required-fixed-duration-and-scope)
   * [Estimating Duration (required: fixed team size and scope)](#estimating-duration-required-fixed-team-size-and-scope)
   * [Estimating impact of team size change on velocity](#estimating-impact-of-team-size-change-on-velocity)
@@ -48,7 +48,7 @@ For the following subsections, remember that team sizes should range between 4 a
 
 The next sub-sections give strategy for estimating team size (assuming duration and scope is fixed) and duration (assuming team size and scope is fixed). If only one factor (team size, duration, scope) is known then the customer would need to nail down what else should be fixed in order to estimate the remaining factor.
 
-### Forecast team velocity  
+### Estimate team velocity  
 * Determine number of ideal man hours available within a sprint, factor these into "realistic" man hours (to cover company meetings, emails, phone calls):
 ideal man hours x focus factor (between 0.55 and 0.7 depending on how efficient your company is, how much red tape).
 * Note each team members skill capability, the tasks they could work on. eg. we wouldn't assign development tasks to a tester. Also note the number of realistic man hours available per team member.
