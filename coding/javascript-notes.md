@@ -172,13 +172,64 @@ console.log('boom'.addBang());
 
 A function that is passed as an argument to another function, returned as a value from a function, or assigned to variables or data structures.
 
-## Partial Application and Currying
+## Factory functions are better than classes and constructor functions
 
-TODO
+As described above ([Invocation and `this`](#invocation-and-this)), `this` is annoying, it's much easier to avoid worrying about `this` (or `new` for that matter) and just use factory functions - enabling private access to variables through closures.
 
-## Factory functions are better than classes
+Example (adapted from [this](https://www.youtube.com/watch?v=ImwrezYhw4w)):
 
-TODO
+```javascript
+//using a constructor function (or a class for that matter)...
+let MyThing = function (myProp) {
+	this.myProp = myProp;
+  this.myFunc = function () {
+  	document.writeln(this.myProp);
+  }
+}
+
+let myThing = new MyThing('prop value');
+//$("button").click(myClass.myFunc) //wont work - binds this to the dom element
+//have to bind the function to the constructed object:
+//$("button").click(myClass.myFunc.bind(myClass))
+//or call the function within a function (when calling function as a method call - this becomes the object calling the method):
+//$("button").click(() => myThing.myFunc())
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// a factory function takes away the need to use `this` at all!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+let makeThing = function (myProp) {
+	return {
+  	myFunc () {
+      //access `myProp` through closure - it's private and don't need `this`!
+    	document.writeln(myProp);
+    }
+  }
+}
+let thing = makeThing('prop value');
+$("button").click(thing.myFunc);
+```
+
+Factory functions are also useful to use partial application, injecting factory functions with common dependencies during app scaffolding, not having to concern with those dependencies when using the factory itself:
+
+```javascript
+let makeMyFactory = ({ connection = null }) => ({ myProp = 'default1' }) => {
+	return {
+  	myFunc () {
+    	document.writeln(`Using connection dependency: ${connection} and myProp: ${myProp}`);
+    }
+  }
+}
+
+//make the factory first, in the app's main
+myFactory = makeMyFactory({connection: 'my connection'});
+
+//then when I need to use the factory for specific cases
+myInstanceFromTheFactory = myFactory({myProp: 'my prop value'});
+anotherInstanceFromTheFactory = myFactory({}); //myProp will default
+
+myInstanceFromTheFactory.myFunc();
+anotherInstanceFromTheFactory.myFunc();
+```
 
 ## Composition is better than inheritance
 
@@ -199,9 +250,11 @@ const addToCart = (cart, item, quantity) => {
 };
 ```
 
-* Build programs on re-usable functions. Through higher order functions (functions that can be passed around) we can use these re-usable functions as building blocks through function composition (output of functions being input of another function and so on). Perfect example [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-function-composition-20dfb109a1a0). Make use of lodash (or ramda) functions `compose` (or `pipe` which is opposite of `compose`) and `curry` to break up a multi input function into a curried version of the same function. 
+* Build programs on re-usable functions. Through higher order functions (functions that can be passed around) we can use these re-usable functions as building blocks through function composition (output of functions being input of another function and so on). Perfect example [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-function-composition-20dfb109a1a0). Make use of lodash (or ramda) functions `compose` (or `pipe` which is opposite of `compose`) and `curry` to break up a multi input function into a curried version of the same function.
 
-* For traversing / computing arrays, rather than using imperative programming (eg. `for(var i=0; i<arr.length; i++`) use the functional methods available on `Array` (eg. `map`, `filter`, etc). 
+* For traversing / computing arrays, rather than using imperative programming (eg. `for(var i=0; i<arr.length; i++`) use the functional methods available on `Array` (eg. `map`, `filter`, etc).
+
+TODO: Partial application, currying, compose all with ramda
 
 ## Don't pollute global scope
 
@@ -221,6 +274,11 @@ myApp.var1.var1_1();
 * `let` and `const` has block scope, `var` has function scope
 * `var` is hoisted
 * `const` cannot be re assigned, but you can modify its properties (if say it's an object), or add/remove elements if it's an array.
+
+### ES6 vs ES5 functions
+
+* `arguments` is not available in ES6 functions
+* in ES6 functions, `this` is automatically inherited from it's outer scope.
 
 ### CORS
 
