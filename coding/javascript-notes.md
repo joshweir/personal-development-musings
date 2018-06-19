@@ -278,8 +278,94 @@ myApp.var1.var1_1();
 ### ES6 vs ES5 functions
 
 * `arguments` is not available in ES6 functions
-* in ES6 functions, `this` is automatically inherited from it's outer scope.
+* in ES6 functions, `this` is whatever `this` is just before the function is called. In ES5, it is whatever owns the function (if not called as an object method, it's usually window or global).
+
+### ES6 Computed Object Keys
+
+```javascript
+my_key = () => 'ahh_hello'
+let obj = {
+  [my_key()]: 'bar'
+}
+console.log(obj) //{ahh_hello: 'bar'}
+```
 
 ### CORS
 
 Usually by default, if you make an xml http request (such as ajax) to an endpoint and the origin url domain name of the request does not match the server url domain name, the request will fail with an error like `No 'Access-Control-Allow-Origin' header is present..`. This is a security measure that the server can specify what endpoint's it trusts to make xhr requests to it. The server could potentially specify, with the CORS headers, what endpoint's it trusts and/or what routes to enable these headers for.
+
+
+### TODO
+
+Ramda library
+
+## import map     from 'ramda/src/map'
+## import filter  from 'ramda/src/filter'
+## import compose from 'ramda/src/compose'
+## import path from 'ramda/src/path'
+
+# `path` - import path from 'ramda/src/path'
+
+Rather than having to do the ampersand stairway to hell:
+response &&
+response.body &&
+response.body.data &&
+response.body.data.name
+use `path`:
+
+import path from 'ramda/src/path'
+const pluckName =3D path(['body', 'data', 'name'])
+pluckName(response) //undefined (no error) if cannot find
+
+
+
+import map     from 'ramda/src/map'
+import filter  from 'ramda/src/filter'
+import compose from 'ramda/src/compose'
+
+
+Object.create(foo) creates a new object but makes foo the prototype, so
+that any object properties on the new object that cannot be found are
+searched up the prototype chain to find. Object.assign assigns the
+properties of remaining arguments directly to the object in the first
+argument, the argument returned is the same object as the first argument.
+
+
+factory function / dependency injection examples:
+
+// from prototype (to save memory)
+// but have to call init method to initialize properties
+const proto =3D {
+init ({make =3D 'honda', color =3D 'red'}) {
+this.make =3D make;
+    this.color =3D color;
+},
+drive () {
+console.log('driving...', 'make: ', this.make);
+}
+}
+const car =3D function () {
+//object created inherits the prototype
+return Object.create(proto);
+}
+const myCar =3D car();
+myCar.init({make: 'toyota'})
+myCar.drive();
+myCar.color;
+
+// factory function inject dependencies
+const makeCar =3D ({connection, otherDep}) =3D> ({make =3D 'toyota', color =
+=3D
+'red'}) =3D> {
+return {
+drive () {
+console.log('driving...' + color + ' ' + make + ' connection: ' +
+connection)
+}
+};
+}
+const connection =3D 'connection';
+const otherDep =3D 'other dep';
+const car =3D makeCar({connection, otherDep});
+const myCar =3D car({color: 'blue'});
+myCar.drive();
