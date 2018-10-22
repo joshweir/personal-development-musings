@@ -1,4 +1,4 @@
-# Personal Development Musings
+# Personal Development Musings 
 Things that I would like to remember.
 
 * [Agile](agile/agile.md)
